@@ -1,0 +1,56 @@
+# Пропишем версию
+version: '3.3'
+# Перечислим сервисы
+services:
+    nginx:
+# Пропишем какой образ мы хотим использовать
+        image: nginx:latest
+# Назовем свой контейнер по красивому
+        container_name: nginx
+# Проброс портов
+        ports:
+            - "85:85"
+            - "443:443"
+# Проброс папок
+        volumes:
+            - ./nginx/core:/etc/nginx/conf.d
+            - ./php/promo/www:/var/www/
+            - ./nginx/logs:/var/log/nginx/
+            - ./nginx/html:/usr/share/nginx/html/
+# Укажем зависимости
+        links:
+            - php
+
+    pgsql:
+
+        image: postgres:latest
+        restart: always
+        ports:
+            - "3306:3306"
+
+        container_name: pgsql
+# Пропишем настройки, предлагаю использовать вместо mypassword более сложный пароль, он пренадлежит root
+        environment:
+
+            - POSTGRES_PASSWORD=promo
+            - POSTGRES_DB=promo
+            - POSTGRES_USER=promo
+
+        volumes:
+            - ./pgsql:/var/lib/postgresql
+
+
+    php:
+# Билдим с помощью dockerfile указав директорию где он лежит
+        build: ./php
+
+        container_name: php-fpm
+
+        volumes:
+            - ./php/promo/www:/var/www
+
+        #command: php /var/www/migrate.php
+
+        links:
+            - pgsql
+
