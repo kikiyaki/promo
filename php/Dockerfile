@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:7.4-fpm
 
 RUN apt-get update && apt-get install -y \
 curl \
@@ -28,6 +28,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
-WORKDIR /var/www/magento2
+WORKDIR /var/www/promo
 
 CMD ["php-fpm"]
