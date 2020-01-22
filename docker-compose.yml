@@ -32,9 +32,9 @@ services:
 # Пропишем настройки, предлагаю использовать вместо mypassword более сложный пароль, он пренадлежит root
         environment:
 
-            - POSTGRES_PASSWORD=migrations
-            - POSTGRES_DB=migrations
-            - POSTGRES_USER=migrations
+            - POSTGRES_PASSWORD=promo
+            - POSTGRES_DB=promo
+            - POSTGRES_USER=promo
 
         volumes:
             - ./pgsql:/var/lib/postgresql
