@@ -14,7 +14,7 @@ services:
 # Проброс папок
         volumes:
             - ./nginx/core:/etc/nginx/conf.d
-            - ./php/promo:/var/www/
+            - ./php/migrations:/var/www/
             - ./nginx/logs:/var/log/nginx/
             - ./nginx/html:/usr/share/nginx/html/
 # Укажем зависимости
@@ -32,9 +32,9 @@ services:
 # Пропишем настройки, предлагаю использовать вместо mypassword более сложный пароль, он пренадлежит root
         environment:
 
-            - POSTGRES_PASSWORD=promo
-            - POSTGRES_DB=promo
-            - POSTGRES_USER=promo
+            - POSTGRES_PASSWORD=migrations
+            - POSTGRES_DB=migrations
+            - POSTGRES_USER=migrations
 
         volumes:
             - ./pgsql:/var/lib/postgresql
@@ -47,7 +47,7 @@ services:
         container_name: php-fpm
 
         volumes:
-            - ./php/promo:/var/www
+            - ./php/migrations:/var/www
 
         #command: php /var/www/migrate.php
 
