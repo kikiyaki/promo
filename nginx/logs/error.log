@@ -1,0 +1,4 @@
+2020/01/22 19:11:20 [error] 6#6: *1 open() "/var/wwwlast" failed (2: No such file or directory), client: 172.28.0.1, server: migrations.dev, request: "GET /migrate.php HTTP/1.1", host: "localhost"
+2020/01/22 19:11:22 [error] 6#6: *1 open() "/var/wwwlast" failed (2: No such file or directory), client: 172.28.0.1, server: migrations.dev, request: "GET /migrate.php HTTP/1.1", host: "localhost"
+2020/01/22 19:11:22 [error] 6#6: *1 open() "/var/wwwlast" failed (2: No such file or directory), client: 172.28.0.1, server: migrations.dev, request: "GET /migrate.php HTTP/1.1", host: "localhost"
+2020/01/22 19:13:34 [error] 6#6: *4 open() "/var/wwwlast" failed (2: No such file or directory), client: 172.28.0.1, server: migrations.dev, request: "GET /migrate.php HTTP/1.1", host: "localhost"

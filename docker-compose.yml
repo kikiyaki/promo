@@ -14,7 +14,7 @@ services:
 # Проброс папок
         volumes:
             - ./nginx/core:/etc/nginx/conf.d
-            - ./php/migrations:/var/www/
+            - ./php/promo:/var/www/
             - ./nginx/logs:/var/log/nginx/
             - ./nginx/html:/usr/share/nginx/html/
 # Укажем зависимости
