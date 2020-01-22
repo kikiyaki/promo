@@ -47,7 +47,7 @@ services:
         container_name: php-fpm
 
         volumes:
-            - ./php/migrations:/var/www
+            - ./php/promo:/var/www
 
         #command: php /var/www/migrate.php
 
