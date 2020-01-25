@@ -39,9 +39,8 @@ services:
         volumes:
             - ./pgsql:/var/lib/postgresql
 
-
     php:
-# Билдим с помощью dockerfile указав директорию где он лежит
+        # Билдим с помощью dockerfile указав директорию где он лежит
         build: ./php
 
         container_name: php-fpm
@@ -49,8 +48,19 @@ services:
         volumes:
             - ./php/promo:/var/www
 
-        #command: php /var/www/migrate.php
-
         links:
             - pgsql
 
+    php-migrate:
+        # Билдим с помощью dockerfile указав директорию где он лежит
+        build: ./php
+
+        container_name: php-migrate
+
+        command: ["/usr/local/bin/php", "/var/www/migrate.php"]
+
+        volumes:
+            - ./php/promo:/var/www
+
+        links:
+            - pgsql
