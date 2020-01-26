@@ -1,1 +1,4 @@
-CREATE TABLE users (id INT, data JSONB);
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    data JSONB
+);
