@@ -4,9 +4,12 @@
 namespace promo;
 
 
+use User\UserStd;
+
 class AppendAction implements Action
 {
     private $GET;
+
 
     public function __construct($GET = null)
     {
@@ -16,23 +19,14 @@ class AppendAction implements Action
     public function handle()
     {
         $userId = $this->GET['userId'];
+        $forUserId = $this->GET['forUserId'];
 
-        $query =
-<<<SQL
-INSERT INTO users (data)
-    VALUES
-    ('
-        {
-        "my":{},
-        "forMe":{}
-         }
-    ')
-    RETURNING id;
-SQL;
-
-        $pdo = new MyPDO();
-        $return = $pdo->query($query)->fetch();
-
-        return $return['id'];
+        $user = new UserStd($forUserId);
+        if ($user->append($userId)) {
+            $response = 'success';
+        } else {
+            $response = 'error';
+        }
+        return $response;
     }
 }
