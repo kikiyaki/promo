@@ -12,7 +12,8 @@ class Route
     public function __construct()
     {
         $this->routes = [
-            '/create' => new CreateAction()
+            '/create' => new CreateAction(),
+            '/append' => new AppendAction()
 
             // ...
             // add new route here

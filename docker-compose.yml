@@ -64,3 +64,12 @@ services:
 
         links:
             - pgsql
+
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8085:8080
+        links:
+          - pgsql
