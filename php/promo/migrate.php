@@ -4,9 +4,9 @@
  * Make database migration
  */
 
-require_once __DIR__ . '/MyPDO.php';
+require_once __DIR__ . '/lib/MyPDO.php';
 
-$pdo = new MyPDO();
+$pdo = new promo\MyPDO();
 
 $migrationFiles = glob(__DIR__ . '/migrations/*.sql');
 foreach ($migrationFiles as $migrationFile) {
