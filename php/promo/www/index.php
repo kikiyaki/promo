@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require_once '../autoload.php';
 
-$uri = $_SERVER['REQUEST_URI'];
+$uriPath = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-$action = (new \promo\Route())->action($uri);
+$action = (new \promo\Route())->action($uriPath);
 echo $action->handle();

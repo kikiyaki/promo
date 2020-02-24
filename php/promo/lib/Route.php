@@ -3,7 +3,7 @@
 namespace promo;
 
 /**
- * Match uri string with action
+ * Match uri path string with action
  */
 class Route
 {
@@ -23,15 +23,15 @@ class Route
 
 
     /**
-     * Select action by uri string
+     * Select action by uri path string
      *
-     * @param $uri
+     * @param $uriPath
      * @return mixed|NotFoundAction
      */
-    public function action($uri)
+    public function action($uriPath)
     {
-        if (isset($this->routes[$uri])) {
-            return $this->routes[$uri];
+        if (isset($this->routes[$uriPath])) {
+            return $this->routes[$uriPath];
         } else {
             return new NotFoundAction();
         }
