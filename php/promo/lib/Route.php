@@ -13,7 +13,8 @@ class Route
     {
         $this->routes = [
             '/create' => new CreateAction(),
-            '/append' => new AppendAction()
+            '/append' => new AppendAction(),
+            '/unlock' => new UnlockAction(),
 
             // ...
             // add new route here
