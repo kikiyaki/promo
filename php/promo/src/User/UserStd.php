@@ -13,6 +13,7 @@ class UserStd implements User
 {
     private $id;
     private $pdo;
+    const FOR_ME_THRESHOLD = 1;
 
     public function __construct($id, $pdo = null)
     {
@@ -56,7 +57,20 @@ class UserStd implements User
 
     public function unlock()
     {
-        // @todo implement method
-        return true;
+        $query = "SELECT data
+                 FROM users
+                 WHERE id=$this->id";
+        $user = $this->pdo->query($query)->fetch();
+        if (!$user) {
+            return false;
+        }
+
+        $user = json_decode($user['data'], true);
+        $forMeIds = $user['forMe'];
+        if (count($forMeIds) >= self::FOR_ME_THRESHOLD) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
