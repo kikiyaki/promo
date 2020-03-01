@@ -4,8 +4,9 @@ namespace promo;
 
 /**
  * Create new user action
+ *
  * @noparam
- * @return [ 'data' => [ 'user_id' => NEW_USER_ID ] ]
+ * @return [ ... , 'data' => [ 'user_id' => NEW_USER_ID ], ... ]
  */
 class CreateAction implements Action
 {
@@ -37,6 +38,7 @@ SQL;
         $return = $pdo->query($query)->fetch();
         $newUserId = $return['id'];
 
+        $this->responseData->setStatus(ResponseData::SUCCESS);
         $this->responseData->setData('NEW_USER_ID', $newUserId);
         return $this->responseData->stringify();
     }

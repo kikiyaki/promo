@@ -1,9 +1,10 @@
 <?php
 
-
 namespace promo;
 
-
+/**
+ * @return [ ... , 'status' => 'NOT_FOUND' , ... ]
+ */
 class NotFoundAction implements Action
 {
     private $GET;
@@ -17,6 +18,7 @@ class NotFoundAction implements Action
 
     public function handle()
     {
-        return 'Action not found';
+        $this->responseData->setStatus(ResponseData::NOT_FOUND);
+        return $this->responseData->stringify();
     }
 }

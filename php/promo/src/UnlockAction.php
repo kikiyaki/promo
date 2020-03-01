@@ -1,11 +1,17 @@
 <?php
 
-
 namespace promo;
 
-
 use User\UserStd;
+use Exception;
 
+/**
+ * Checks if user reach required 'forMe' users count
+ *
+ * @param 'id' user id
+ * @return [ ... , 'data' => [ 'unlock' => '1' ] , ... ]
+ * 1 - true, 0 - false
+ */
 class UnlockAction implements Action
 {
     private $GET;
@@ -21,10 +27,18 @@ class UnlockAction implements Action
     {
         $userId = $this->GET['id'];
         $user = new UserStd($userId);
-        if ($user->unlock()) {
-            return 'success';
-        } else {
-            return 'error';
+
+        try {
+            $this->responseData->setStatus(ResponseData::SUCCESS);
+            if ($user->unlock()) {
+                $this->responseData->setData('unlock', true);
+            } else {
+                $this->responseData->setData('unlock', false);
+            }
+        } catch (Exception $e) {
+            $this->responseData->setStatus(ResponseData::ERROR);
         }
+
+        return $this->responseData->stringify();
     }
 }

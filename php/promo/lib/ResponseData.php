@@ -9,7 +9,15 @@ use Exception;
  */
 class ResponseData
 {
-    private $arrayResponse = ['data' => []];
+    private $arrayResponse = [
+        'data' => [],
+        'status' => null
+    ];
+
+    // Allowed status values
+    const SUCCESS = 'SUCCESS';
+    const ERROR = 'ERROR';
+    const NOT_FOUND = 'NOT_FOUND';
 
 
     /**
@@ -21,6 +29,17 @@ class ResponseData
     public function setData($key, $value)
     {
         $this->arrayResponse['data'][$key] = $value;
+    }
+
+
+    /**
+     * Set response status
+     *
+     * @param $value
+     */
+    public function setStatus($value)
+    {
+        $this->arrayResponse['status'] = $value;
     }
 
 
