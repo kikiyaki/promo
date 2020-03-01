@@ -1,10 +1,9 @@
 <?php
 
-
 namespace User;
 
-
 use promo\MyPDO;
+use Exception;
 
 /**
  * Base user
@@ -33,7 +32,7 @@ class UserStd implements User
                  WHERE id=$this->id";
         $user = $this->pdo->query($query)->fetch();
         if (!$user) {
-            return false;
+            throw new Exception('No such user');
         }
 
         $data = json_decode($user['data'], true);
@@ -62,7 +61,7 @@ class UserStd implements User
                  WHERE id=$this->id";
         $user = $this->pdo->query($query)->fetch();
         if (!$user) {
-            return false;
+            throw new Exception('No such user');
         }
 
         $user = json_decode($user['data'], true);
