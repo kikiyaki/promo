@@ -58,8 +58,8 @@ class UserStd implements User
         if (!$appendedUser) {
             throw new Exception('No such appended user');
         }
-        $appendedData = json_decode($appendedUser['data'], true);
-        $appendedMy = $appendedUser['my'];
+        $appendedUserData = json_decode($appendedUser['data'], true);
+        $appendedMy = $appendedUserData['my'];
         if (count($appendedMy) >= self::MAX_APPEND_NUMBER) {
             return false;
         }
@@ -72,6 +72,15 @@ class UserStd implements User
                  SET data='$dataJSON'
                  WHERE id=$this->id";
         $this->pdo->exec($query);
+
+        $appendedMy[] = $this->id;
+        $appendedUserData['my'] = $appendedMy;
+        $appendedUserDataJSON = json_encode($appendedUserData);
+        $queryAppended = "UPDATE users
+                 SET data='$appendedUserDataJSON'
+                 WHERE id=$id";
+        $this->pdo->exec($queryAppended);
+
         return true;
     }
 
