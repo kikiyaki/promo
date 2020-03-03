@@ -6,7 +6,8 @@ use User\UserStd;
 use Exception;
 
 /**
- * Add one user to another user`s 'forMe' list
+ * Add user1 to user2`s 'forMe' list
+ * and user2 to user1`s 'me' list
  *
  * @param 'userId' added user id
  * @param 'forUserId'

@@ -13,6 +13,7 @@ class UserStd implements User
     private $id;
     private $pdo;
     const FOR_ME_THRESHOLD = 1;
+    const MAX_APPEND_NUMBER = 1;
 
     public function __construct($id, $pdo = null)
     {
@@ -21,12 +22,20 @@ class UserStd implements User
     }
 
 
+    /**
+     * Add user id to this user`s 'forMe' list
+     * and this user to with id user 'me' list
+     *
+     * @param $id
+     * @return bool
+     * @throws Exception
+     */
     public function append($id)
     {
         if ($id == $this->id) {
             return false;
         }
-
+        // Check user
         $query = "SELECT data
                  FROM users
                  WHERE id=$this->id";
@@ -34,7 +43,6 @@ class UserStd implements User
         if (!$user) {
             throw new Exception('No such user');
         }
-
         $data = json_decode($user['data'], true);
         $forMe = $data['forMe'];
         // Check if already there is id in current user`s list forMe
@@ -42,10 +50,24 @@ class UserStd implements User
             return false;
         }
 
+        // Check appended user
+        $queryAppended = "SELECT data
+                 FROM users
+                 WHERE id=$id";
+        $appendedUser = $this->pdo->query($queryAppended)->fetch();
+        if (!$appendedUser) {
+            throw new Exception('No such appended user');
+        }
+        $appendedData = json_decode($appendedUser['data'], true);
+        $appendedMy = $appendedUser['my'];
+        if (count($appendedMy) >= self::MAX_APPEND_NUMBER) {
+            return false;
+        }
+
+        // Append
         $forMe[] = $id;
         $data['forMe'] = $forMe;
         $dataJSON = json_encode($data);
-
         $query = "UPDATE users
                  SET data='$dataJSON'
                  WHERE id=$this->id";
