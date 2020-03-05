@@ -13,7 +13,7 @@ use Exception;
  * @param 'forUserId'
  * @return [ ... , 'status' => 'STATUS' , ... ]
  */
-class AppendAction implements Action
+class AppendAction extends ActionStd
 {
     private $GET;
     private $responseData;

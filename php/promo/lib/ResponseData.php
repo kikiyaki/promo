@@ -18,6 +18,7 @@ class ResponseData
     const SUCCESS = 'SUCCESS';
     const ERROR = 'ERROR';
     const NOT_FOUND = 'NOT_FOUND';
+    const WRONG_KEY = 'WRONG_KEY';
 
 
     /**

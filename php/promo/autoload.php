@@ -1,6 +1,6 @@
 <?php
 /**
- * Load all files in src/
+ * Load all files in directories: 'src', 'lib'
  */
 
 

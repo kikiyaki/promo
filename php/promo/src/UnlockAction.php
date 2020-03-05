@@ -12,7 +12,7 @@ use Exception;
  * @return [ ... , 'data' => [ 'unlock' => '1' ] , ... ]
  * 1 - true, 0 - false
  */
-class UnlockAction implements Action
+class UnlockAction extends ActionStd
 {
     private $GET;
     private $responseData;
