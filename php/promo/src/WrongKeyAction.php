@@ -3,9 +3,9 @@
 namespace promo;
 
 /**
- * @return [ ... , 'status' => 'NOT_FOUND' , ... ]
+ * @return [ ... , 'status' => 'WRONG_KEY' , ... ]
  */
-class NotFoundAction extends ActionStd
+class WrongKeyAction implements Action
 {
     private $GET;
     private $responseData;
@@ -18,7 +18,7 @@ class NotFoundAction extends ActionStd
 
     public function handle()
     {
-        $this->responseData->setStatus(ResponseData::NOT_FOUND);
+        $this->responseData->setStatus(ResponseData::WRONG_KEY);
         return $this->responseData->stringify();
     }
 }

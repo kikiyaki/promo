@@ -8,7 +8,7 @@ namespace promo;
  * @noparam
  * @return [ ... , 'data' => [ 'user_id' => NEW_USER_ID ], ... ]
  */
-class CreateAction implements Action
+class CreateAction extends ActionStd
 {
     private $GET;
     private $responseData;
