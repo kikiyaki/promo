@@ -15,9 +15,9 @@ abstract class ActionStd implements Action
     public function run()
     {
         // Check key
-        if (isset($_GET['key'])) {
-            $key = $_GET['key'];
-            if ($key === Config::KEY) {
+        if (isset($_GET['api_key'])) {
+            $key = $_GET['api_key'];
+            if ($key === Config::API_KEY) {
                 return $this->handle();
             }
         }
