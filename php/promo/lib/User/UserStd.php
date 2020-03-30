@@ -103,4 +103,27 @@ class UserStd implements User
             return false;
         }
     }
+
+
+    public function info()
+    {
+        $userInfo = $this->pdo->query("SELECT * FROM users
+                                    WHERE id=$this->id")->fetch();
+        if (!$userInfo) {
+            throw new Exception('No such user');
+        }
+        return $userInfo;
+    }
+
+
+    public function checkKey($key)
+    {
+        $userInfo = $this->info();
+
+        if ($userInfo['key'] === $key) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

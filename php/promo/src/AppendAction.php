@@ -28,17 +28,25 @@ class AppendAction extends ActionStd
     {
         $userId = $this->GET['userId'];
         $forUserId = $this->GET['forUserId'];
+        $userKey = $this->GET['key'];
 
+        $appendedUser = new UserStd($userId);
         $user = new UserStd($forUserId);
+
         try {
-            if ($user->append($userId)) {
-                $this->responseData->setStatus(ResponseData::SUCCESS);
+            if ($appendedUser->checkKey($userKey)) {
+                if ($user->append($userId)) {
+                    $this->responseData->setStatus(ResponseData::SUCCESS);
+                } else {
+                    $this->responseData->setStatus(ResponseData::ERROR);
+                }
             } else {
-                $this->responseData->setStatus(ResponseData::ERROR);
+                $this->responseData->setStatus(ResponseData::WRONG_KEY);
             }
         } catch (Exception $e) {
             $this->responseData->setStatus(ResponseData::ERROR);
         }
+
         return $this->responseData->stringify();
     }
 }

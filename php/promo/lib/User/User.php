@@ -15,7 +15,6 @@ interface User
      */
     public function append($id);
 
-
     /**
      * Unlock current user
      *
@@ -25,4 +24,19 @@ interface User
      * @return bool
      */
     public function unlock();
+
+    /**
+     * User info
+     *
+     * @return array
+     */
+    public function info();
+
+    /**
+     * Check unique user key
+     *
+     * @param string $key
+     * @return bool
+     */
+    public function checkKey($key);
 }
