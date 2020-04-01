@@ -9,8 +9,8 @@ use Exception;
  * Add user1 to user2`s 'forMe' list
  * and user2 to user1`s 'me' list
  *
- * @param 'userId' added user id
- * @param 'forUserId'
+ * @param 'user_code' added user id
+ * @param 'for_user_code'
  * @return [ ... , 'status' => 'STATUS' , ... ]
  */
 class AppendAction extends ActionStd
@@ -26,22 +26,21 @@ class AppendAction extends ActionStd
 
     public function handle()
     {
-        $userId = $this->GET['userId'];
-        $forUserId = $this->GET['forUserId'];
-        $userKey = $this->GET['key'];
+        $userCode = $this->GET['user_code'];
+        $forUserCode = $this->GET['for_user_code'];
+
+        $promoCode = new PromoCode();
+        $userId = $promoCode->idByCode($userCode);
+        $forUserId = $promoCode->idByCode($forUserCode);
 
         $appendedUser = new UserStd($userId);
         $user = new UserStd($forUserId);
 
         try {
-            if ($appendedUser->checkKey($userKey)) {
-                if ($user->append($userId)) {
-                    $this->responseData->setStatus(ResponseData::SUCCESS);
-                } else {
-                    $this->responseData->setStatus(ResponseData::ERROR);
-                }
+            if ($user->append($userId)) {
+                $this->responseData->setStatus(ResponseData::SUCCESS);
             } else {
-                $this->responseData->setStatus(ResponseData::WRONG_KEY);
+                $this->responseData->setStatus(ResponseData::ERROR);
             }
         } catch (Exception $e) {
             $this->responseData->setStatus(ResponseData::ERROR);
