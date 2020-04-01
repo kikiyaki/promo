@@ -8,7 +8,7 @@ use Exception;
 /**
  * Checks if user reach required 'forMe' users count
  *
- * @param 'id' user id
+ * @param 'user_code' unique user code
  * @return [ ... , 'data' => [ 'unlock' => '1' ] , ... ]
  * 1 - true, 0 - false
  */
@@ -16,16 +16,19 @@ class UnlockAction extends ActionStd
 {
     private $GET;
     private $responseData;
+    private $promoCode;
 
-    public function __construct($GET = null, $responseData = null)
+    public function __construct($GET = null, $responseData = null, $promoCode = null)
     {
         $this->GET = $GET ? $GET : $_GET;
         $this->responseData = $responseData ? $responseData : new ResponseData();
+        $this->promoCode = $promoCode ? $promoCode : new PromoCode();
     }
 
     public function handle()
     {
-        $userId = $this->GET['id'];
+        $userCode = $this->GET['user_code'];
+        $userId = $this->promoCode->idByCode($userCode);
         $user = new UserStd($userId);
 
         try {

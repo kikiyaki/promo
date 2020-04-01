@@ -9,8 +9,8 @@ use Exception;
  * Add user1 to user2`s 'forMe' list
  * and user2 to user1`s 'me' list
  *
- * @param 'userId' added user id
- * @param 'forUserId'
+ * @param 'user_code' added user id
+ * @param 'for_user_code'
  * @return [ ... , 'status' => 'STATUS' , ... ]
  */
 class AppendAction extends ActionStd
@@ -26,8 +26,12 @@ class AppendAction extends ActionStd
 
     public function handle()
     {
-        $userId = $this->GET['userId'];
-        $forUserId = $this->GET['forUserId'];
+        $userCode = $this->GET['user_code'];
+        $forUserCode = $this->GET['for_user_code'];
+
+        $promoCode = new PromoCode();
+        $userId = $promoCode->idByCode($userCode);
+        $forUserId = $promoCode->idByCode($forUserCode);
 
         $user = new UserStd($forUserId);
         try {

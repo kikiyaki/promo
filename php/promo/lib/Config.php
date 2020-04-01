@@ -4,5 +4,5 @@ namespace promo;
 
 class Config
 {
-    const KEY = 'qazwsx123';
+    const API_KEY = 'qazwsx123';
 }
