@@ -25,7 +25,7 @@ class CreateAction extends ActionStd
     {
         $query =
 <<<SQL
-INSERT INTO users (data, key)
+INSERT INTO users (data)
     VALUES
     ('
         {
