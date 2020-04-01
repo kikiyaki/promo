@@ -25,7 +25,7 @@ class CreateAction extends ActionStd
     {
         $query =
 <<<SQL
-INSERT INTO users (data)
+INSERT INTO users (data, key)
     VALUES
     ('
         {
@@ -43,6 +43,7 @@ SQL;
 
         $this->responseData->setStatus(ResponseData::SUCCESS);
         $this->responseData->setData('NEW_USER_CODE', $newUserCode);
+
         return $this->responseData->stringify();
     }
 }

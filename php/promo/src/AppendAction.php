@@ -33,7 +33,9 @@ class AppendAction extends ActionStd
         $userId = $promoCode->idByCode($userCode);
         $forUserId = $promoCode->idByCode($forUserCode);
 
+        $appendedUser = new UserStd($userId);
         $user = new UserStd($forUserId);
+
         try {
             if ($user->append($userId)) {
                 $this->responseData->setStatus(ResponseData::SUCCESS);
@@ -43,6 +45,7 @@ class AppendAction extends ActionStd
         } catch (Exception $e) {
             $this->responseData->setStatus(ResponseData::ERROR);
         }
+
         return $this->responseData->stringify();
     }
 }
