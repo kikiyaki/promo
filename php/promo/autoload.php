@@ -9,6 +9,7 @@ loadFiles(__DIR__ . "/src");
 
 /**
  * Recursive load all files in directory
+ * todo make composer autoloading
  *
  * @param string $dir
  */
